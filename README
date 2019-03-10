@@ -1,0 +1,52 @@
+Cocea Stefan-Bogdan
+312 CB
+
+	Tema contine 3 fisiere: ex.c, bmp_header.h, get_numbers.h. Fisierul bmp_header.h contine
+declaratiile structurilor necesare pentru a putea lucra cu un fisier de tip bmp. Fisierul
+get_numbers.h contine functia get_number care genereaza numerele de la 1 la 9. Aceste numere sunt
+create pe cate o linie a matricii m. Fiecare numar este format din 25 de caractre (0 sau 2).Aceste 
+numere vor fi folosite pentru recunoasterea cifrelor din captcha. Deoarece in fisierul binar cifrele
+vor fi inversate, si generarea cifrelor din functia get_number va urma acelasi procedeu.
+	
+	In fisierul ex.c se afla rezolvarea propriu-zisa a temei.
+
+   Functia nameImg_task genereaza numele corespunzatoare fisierelor.
+   Functia padding calculeaza numarul de octeti pentru padding de la finalul unei singure linii.
+   Functia compare are rolul de a determina, pe rand, cate o cifra din captcha. Ese comparata 
+secventa de caractere din bmp_Image cu cea din numerele generate de functia get_number.
+   Functia get_number determina secventele de caractere pentru cifrele de la 1 la 9.(get_numbers.h)
+   Functia eliminate are rolul de a elimina elementele nedorite (de la task-ul 3) din structura
+color_pixel si vectorul numbers.(voi reveni cu explicatii in main).   
+
+   Am declarat doua structuri:
+	- imp_pixel are rolul de a salva pixelul important din fiecare cifra;
+	- color_pixel are rolul de a salva culoarea fiecarei cifrei.
+   Vectorul numbers slaveaza numerele din captcha.
+
+	Functia main:
+
+   In prima parte am realizat citirea din fisierul input.txt si atribuirea structurilor.
+
+	Task-ul 1: Am cautat in bmp_Image (matricea care retine imaginea fisierului bmp) pixelii
+care nu sunt albi si le-am schimbat culoarea. Cautarea nu include si octetii de padding.
+
+	Task-ul 2: Pentru acest task am alocat o matrice, numita matrice, care simuleaza imaginea
+captcha-ului. Fiecarui octet din aceasta matrice ii corespunde un pixel din captcha.( numerele sunt
+inversate).
+	Cu ajutorul functie compare am identificat pozitia fiecarei cifre, pozitie determinata de 
+pixelul important (coltul din stanga jos alu unei matrici de 5x5).Pozitia pixelului important a 
+fost salvata in Imp_Pixel. Vectorul numbers retine valoarea fiecarei cifre. Fiecare cifra gasita a 
+fost apoi scrisa in fisierul ".text". 
+
+	Task-ul 3:
+	
+	Reinitializez vectorul bmp_Image deoarece culoarea cifrelor a fost shimbata la task-ul 1. Pe
+baza unui principiu asemanator cu cel de la task-ul 1, determin culoarea fiecarei cifre si o salvez
+in structura Color_Pixel.Culoarea fiecarei cifre o determin prin pixelul de coordonate (2,4), 
+coordonate relative la pixelul dominant.(acest pixel apare in toate cifrele si este colorat).
+	Asadar, pe pozitia i voi avea pixelul important al cifrei i (in Imp_Pixel), culoarea cifrei i
+(in Color_Pixel) si valoarea cifrei i (in vecorul numbers), toate pe acceasi pozitie.
+	Pentru fiecare numar care trebuie eliminat la task-ul 3 , elimin atributele cifrei respective
+din Imp_Pixel, Color_Pixel si numbers.(functia eliminate)
+	Dupa eliminare transcriu cifrele ramase in Imagine.
+ 
